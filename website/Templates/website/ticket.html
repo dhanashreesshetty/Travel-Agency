@@ -1,0 +1,45 @@
+{% extends "website/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Booked!</title>
+        <style>
+        table td,th{
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 20px;
+        }
+        table th{
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: gray;
+            color: white;
+        }
+        h2{
+            color:red;
+        }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <br>
+        <h2>Ticket Reservation</h2>
+        <br>
+        <table>
+        <tr>
+        <th>Train Name</th><th>Date of journey</th><th>Source station</th><th>Destination station</th>
+        </tr>
+        <tr>
+        <td>{{obj2.name}}</td><td>{{ obj2.ntc }}</td><td>{{obj.source_stn}}</td><td>{{obj.dest_stn}}</td>
+        </tr>
+        <tr>
+        </table>
+        <br>
+        <h2></h2>
+
+        </div>
+    </body>
+</html>
+{% endblock content %}

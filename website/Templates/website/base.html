@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<style>
+		#myheader{
+			background-color: #FF0000;
+	    font-size: 50px;
+			font-family: "Lobster", serif;
+			color: white;
+			padding: 15px;
+		}
+
+		/* The sticky class is added to the header with JS when it reaches its scroll position */
+		.sticky {
+			position: fixed;
+			top: 0;
+			width: 100%
+		}
+
+		/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+		.sticky + .content {
+			padding-top: 102px;
+		}
+	  /* navbar */
+	  #navbar ul{
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #333;
+	  }
+
+	  #navbar li{
+	    float: left;
+	  }
+
+	  #navbar li a{
+	    display: block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	  }
+
+	  #navbar li a:hover:not(.active){
+	    background-color: black;
+	  }
+
+	  #navbar .active{
+	    background-color: white;
+	    color:#FF0000;
+	  }
+	    
+	  /*endnavbar*/
+	</style>
+</head>
+<body><div id="headerandnav">
+	<!--Header block-->
+	<div id="myheader">
+		<p>Travel Agency</p>
+	</div>
+	<!--end Header-->
+  <!--nav bar----->
+  <div id="navbar">
+      <ul>
+      	<div id="leftnav">
+	        <li><a class="active" href="{% url 'dash' %}">Home</a></li>
+	        <li><a href="{% url 'contact' %}">Contact</a></li>
+	        <li><a href="{% url 'about' %}">About</a></li>
+	    </div>
+        <div id="rightnav">
+        	{% if user.is_authenticated %}
+        		<li style="float:right"><a href="{% url 'profile' %}">Profile</a></li>
+        		<li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
+					{% else %}
+		        <li style="float:right"><a href="{% url 'register' %}">Register</a></li>
+		        <li style="float:right"><a href="{% url 'login' %}">Login</a></li>
+	        {%  endif %}
+	    </div>
+  </div>
+	</div>
+
+  <!---end nav bar--->
+  <div>
+  	{% if messages %}
+  	{% for message in messages %}
+  		<div class="alert alert-{{ messsage.tags }}">
+  			{{ message }}
+  		</div>
+  	{% endfor %}
+  	{% endif %}
+  	{% block content %}{% endblock content %}
+  </div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

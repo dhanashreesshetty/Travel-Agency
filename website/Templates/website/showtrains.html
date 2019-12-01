@@ -1,0 +1,62 @@
+{% extends "website/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Choose your train</title>
+    <style>
+        .button3 {
+              background-color: white; 
+              color: black; 
+              padding: 15px;
+              font-size: 25px;
+              border: 2px solid #f44336;
+              margin: 50px;
+              display: flex;
+              justify-content: center;
+            }
+
+            .button3:hover {
+              background-color: #f44336;
+              color: white;
+              display: flex;
+              justify-content: center;
+            }
+    </style>
+    </head>
+    <body>
+        <div class="container">            
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Departure Station</th>
+                    <th>Arrival Station</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Available seats</th>
+                    <th>Cost per head</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in obj %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td>{{i.source_stn}}</td>
+                        <td>{{i.dest_stn}}</td>
+                        <td>{{i.d_time}}</td>
+                        <td>{{i.a_time}}</td>
+                        <td>{{i.seats}}</td>
+                        <form method="POST" action="{% url 'book' %}">
+                        {% csrf_token %}
+                            <td><input name='book' value="{{i.id}}" style="display:none"></td>
+                            <td><button type="submit" class="button button3">Book</button></td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}
